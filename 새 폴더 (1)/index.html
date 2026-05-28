@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로봇소프트웨어과 - 혁신의 중심</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Cinematic 360 3D MacBook Pro Model */
+        :root { --mac-silver: #4d4d4d; --mac-dark: #1a1a1a; --mac-glow: rgba(0, 212, 255, 0.4); }
+        .macbook-3d-scene {
+            width: 100%; height: 400px; perspective: 2000px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 40px 0;
+        }
+        .macbook-3d-model {
+            position: relative; width: 320px; height: 210px;
+            transform-style: preserve-3d; transition: transform 0.1s ease-out;
+            animation: autoSpin 15s infinite linear;
+        }
+        @keyframes autoSpin {
+            0% { transform: rotateY(0deg) rotateX(0deg); }
+            50% { transform: rotateY(10deg) rotateX(5deg); }
+            100% { transform: rotateY(0deg) rotateX(0deg); }
+        }
+        /* Display Lid */
+        .model-lid {
+            position: absolute; width: 100%; height: 100%;
+            transform-origin: bottom; transform-style: preserve-3d;
+            transform: rotateX(-5deg); transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            z-index: 5;
+        }
+        .model-lid .face { position: absolute; width: 100%; height: 100%; border-radius: 12px; backface-visibility: hidden; }
+        .model-lid .front { 
+            background: #000; border: 1px solid rgba(255,255,255,0.2); 
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+            box-shadow: 0 0 40px var(--mac-glow);
+        }
+        .model-lid .back { 
+            background: var(--mac-silver); transform: rotateY(180deg);
+            background-image: radial-gradient(circle at center, #666, #333);
+        }
+        /* Base / Keyboard Part */
+        .model-base {
+            position: absolute; width: 100%; height: 14px; bottom: -10px;
+            transform-style: preserve-3d; transform: rotateX(85deg);
+        }
+        .model-base .face { position: absolute; background: var(--mac-silver); border: 1px solid rgba(255,255,255,0.1); }
+        .model-base .top { width: 102%; height: 220px; top: -210px; left: -1%; background: linear-gradient(to bottom, #111, #333); border-radius: 10px; }
+        .model-base .bottom { width: 102%; height: 220px; top: -210px; left: -1%; transform: translateZ(-14px); background: #000; }
+        .model-base .front { width: 102%; height: 14px; left: -1%; bottom: -10px; transform: rotateX(-90deg) translateZ(10px); }
+        /* Interactive Animation */
+        .macbook-3d-scene:hover .macbook-3d-model { animation: none; }
+        .macbook-3d-scene:hover .model-lid { transform: rotateX(-35deg); }
+        
+        .card-image { width: 100%; height: 100%; background-size: cover; background-position: center; }
+        .screen-glare {
+            position: absolute; top: 0; left: -150%; width: 200%; height: 100%;
+            background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
+            animation: screenScan 8s infinite linear;
+        }
+        .video-progress {
+            position: absolute; bottom: 10px; left: 20px; height: 3px; background: #00d4ff;
+            border-radius: 2px; animation: videoFlow 8s infinite linear;
+        }
+        @keyframes videoFlow { 0% { width: 0%; } 100% { width: 95%; } }
+        @keyframes screenScan { 0% { left: -150%; } 30%, 100% { left: 150%; } }
+        .is-visible { opacity: 1 !important; transform: none !important; }
+    </style>
+</head>
+<body>
+    <div class="fixed-login-container">
+        <a href="#" id="login-trigger" class="btn-login-premium">로그인</a>
+    </div>
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <p>2026학년도 로봇소프트웨어과 신입생 모집 중! <a href="#">모집 요강 확인하기 ></a></p>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <nav class="chapter-nav">
+            <div class="container">
+                <ul class="chapter-list">
+                    <li><a href="#" class="view-trigger active" data-view="intro"><span>학과소개</span></a></li>
+                    <li><a href="#" class="view-trigger" data-view="curriculum"><span>교육과정</span></a></li>
+                    <li><a href="#" class="view-trigger" data-view="notice"><span>학과공지</span></a></li>
+                    <li><a href="#" class="view-trigger" data-view="clubs"><span>전공동아리</span></a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="view-container">
+            <!-- Introduction View -->
+            <div id="view-intro" class="content-view active">
+
+        <!-- Hero Section -->
+        <section id="intro-hero" class="section-padding fade-in-section">
+            <div class="container">
+                <div class="hero-container" style="height: 550px; position: relative; overflow: hidden; border-radius: 30px;">
+                    <div class="hero-image" role="img" aria-label="첨단 로봇 소프트웨어 연구소"></div>
+                    <div class="hero-text-overlay" style="position: absolute; top: 50%; left: 8%; transform: translateY(-50%); color: white; text-shadow: 0 4px 20px rgba(0,0,0,0.6); max-width: 600px;">
+                        <h1 style="font-size: 56px; margin-bottom: 15px; font-weight: 700;">미래를 설계하는,<br>로봇소프트웨어과</h1>
+                        <p style="font-size: 18px; line-height: 1.6; opacity: 0.95;">인공지능 소프트웨어와 로봇 하드웨어의 융합을 통해 4차 산업혁명의 핵심 인재로 거듭나세요.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Department Goals & Characteristics -->
+        <section id="intro" class="section-padding-large fade-in-section">
+            <div class="container">
+                <header class="section-title-wrapper-centered" style="margin-bottom: 80px;">
+                    <div class="text-mask"><h2>로봇소프트웨어과 특성 및 교육 목표</h2></div>
+                </header>
+                
+                <div class="intro-main-card glass-panel">
+                    <div class="intro-content-wrapper">
+                        <div class="intro-headline">
+                            <h3 style="font-size: 32px; color: #fff; line-height: 1.4; font-weight: 700;">
+                                첨단 로봇산업의 핵심,<br>
+                                <span style="color: var(--accent-blue);">로봇소프트웨어 전문기술인 양성</span>
+                            </h3>
+                        </div>
+                        
+                        <div class="process-diagram">
+                            <div class="process-circle-large">
+                                <span>3년제</span>
+                            </div>
+                            <div class="process-connector">
+                                <div class="dot-line"></div>
+                                <span class="arrow">➤</span>
+                            </div>
+                            <div class="process-steps">
+                                <div class="step-item glass-panel">로봇소프트웨어 운용 및 유지보수 전문기술인 양성</div>
+                                <div class="step-item glass-panel">프로젝트 교육을 통한 현장 중심 로봇실무인력 양성</div>
+                                <div class="step-item glass-panel">첨단 로봇산업 분야 특성화 교육을 통한 로봇전문가 양성</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="characteristics-section" style="margin-top: 60px;">
+                    <div class="char-header glass-panel-blue">
+                        <h3>로봇소프트웨어과 특성</h3>
+                    </div>
+                    <div class="characteristics-grid" style="margin-top: 30px;">
+                        <div class="char-card glass-panel slide-up-section delay-1">
+                            <span class="num">01</span>
+                            <p>4차 산업혁명에 필요한 <strong>로봇 관련 융합 기술</strong>과 산업체 수요에 맞춘 <strong>실무위주 교육과정</strong> 운영</p>
+                        </div>
+                        <div class="char-card glass-panel slide-up-section delay-2">
+                            <span class="num">02</span>
+                            <p>프로젝트식 교육, 전공동아리 운영을 통한 <strong>실무능력과 창의성 및 팀워크 개발</strong></p>
+                        </div>
+                        <div class="char-card glass-panel slide-up-section delay-3">
+                            <span class="num">03</span>
+                            <p>산업체 경험이 풍부하고 교육에 대한 열정이 가득한 <strong>우수한 교수진</strong></p>
+                        </div>
+                        <div class="char-card glass-panel slide-up-section delay-4">
+                            <span class="num">04</span>
+                            <p>높은 수준의 취업률 및 대기업 진출 비율과 양질의 취업을 위한 <strong>취업 컨설팅, 진로상담</strong> 실시</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="section-padding fade-in-section stats-section">
+            <div class="container" style="background: #fbfbfd; border-radius: 30px; padding: 60px 40px; display: flex; justify-content: space-around; text-align: center; border: 1px solid #f2f2f7;">
+                <div class="stat-item">
+                    <h4 style="font-size: 52px; color: #007aff; font-weight: 700; margin-bottom: 5px;">95.8%</h4>
+                    <p style="color: #86868b; font-size: 15px;">최근 3년 평균 취업률</p>
+                </div>
+                <div class="stat-item">
+                    <h4 style="font-size: 52px; color: #007aff; font-weight: 700; margin-bottom: 5px;">24건</h4>
+                    <p style="color: #86868b; font-size: 15px;">국내외 기술 특허 보유</p>
+                </div>
+                <div class="stat-item">
+                    <h4 style="font-size: 52px; color: #007aff; font-weight: 700; margin-bottom: 5px;">40억</h4>
+                    <p style="color: #86868b; font-size: 15px;">정부 지원 국책사업 수행</p>
+                </div>
+                <div class="stat-item">
+                    <h4 style="font-size: 52px; color: #007aff; font-weight: 700; margin-bottom: 5px;">TOP</h4>
+                    <p style="color: #86868b; font-size: 15px;">전국 로봇 경진대회 대통령상</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Department Info Hero Card (Part of Intro) -->
+        <section class="section-padding fade-in-section">
+            <div class="container">
+                <div class="dept-info-card-premium">
+                    <div class="dept-card-bg" style="background-image: url('robot-lab-bg.png');"></div>
+                    <div class="dept-card-overlay"></div>
+                    <div class="dept-card-content">
+                        <div class="dept-text-group">
+                            <h1 class="dept-main-title">로봇소프트웨어과</h1>
+                            <p class="dept-sub-title">로봇소프트웨어 분야를 이끌 인재양성의 중심</p>
+                            <h2 class="dept-eng-title">Robot Software</h2>
+                        </div>
+                        <div class="dept-info-bar">
+                            <div class="info-item">
+                                <span class="info-icon">📍</span>
+                                <span class="info-text">4호관 206호</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">📞</span>
+                                <span class="info-text">02-2610-1832</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">✉️</span>
+                                <span class="info-text">yjyang@dongyang.ac.kr</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dept-char-wrapper">
+                        <img src="robot-char.png" alt="로봇 캐릭터" class="dept-char-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Curriculum View -->
+    <div id="view-curriculum" class="content-view">
+
+        <!-- Research Grid -->
+        <section id="curriculum" class="section-padding fade-in-section">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <div class="text-mask"><h2>연구 분야 및 기술 스택</h2></div>
+                    <a href="#" class="link-more">전체 커리큘럼 보기 ></a>
+                </div>
+                <div class="lineup-grid">
+                    <div class="lineup-card slide-up-section delay-1">
+                        <div class="macbook-3d-scene">
+                            <div class="macbook-3d-model">
+                                <div class="model-lid">
+                                    <div class="face front">
+                                        <div class="card-image bg-dept-ai"></div>
+                                        <div class="screen-glare"></div>
+                                        <div class="video-progress"></div>
+                                    </div>
+                                    <div class="face back"></div>
+                                </div>
+                                <div class="model-base">
+                                    <div class="face top"></div>
+                                    <div class="face front"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>AI SW 엔진</h3>
+                        <p class="description">PyTorch 기반 자율 제어 및 머신러닝</p>
+                    </div>
+                    <div class="lineup-card slide-up-section delay-2">
+                        <div class="macbook-3d-scene">
+                            <div class="macbook-3d-model">
+                                <div class="model-lid">
+                                    <div class="face front">
+                                        <div class="card-image bg-dept-robot"></div>
+                                        <div class="screen-glare"></div>
+                                        <div class="video-progress"></div>
+                                    </div>
+                                    <div class="face back"></div>
+                                </div>
+                                <div class="model-base">
+                                    <div class="face top"></div>
+                                    <div class="face front"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>로봇 하드웨어</h3>
+                        <p class="description">ROS 기반 로봇 제어 및 기구 설계</p>
+                    </div>
+                    <div class="lineup-card slide-up-section delay-1">
+                        <div class="macbook-3d-scene">
+                            <div class="macbook-3d-model">
+                                <div class="model-lid">
+                                    <div class="face front">
+                                        <div class="card-image bg-dept-nano"></div>
+                                        <div class="screen-glare"></div>
+                                        <div class="video-progress"></div>
+                                    </div>
+                                    <div class="face back"></div>
+                                </div>
+                                <div class="model-base">
+                                    <div class="face top"></div>
+                                    <div class="face front"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>임베디드 시스템</h3>
+                        <p class="description">RTOS 및 마이크로컨트롤러 활용</p>
+                    </div>
+                    <div class="lineup-card slide-up-section delay-2">
+                        <div class="macbook-3d-scene">
+                            <div class="macbook-3d-model">
+                                <div class="model-lid">
+                                    <div class="face front">
+                                        <div class="card-image bg-dept-smart"></div>
+                                        <div class="screen-glare"></div>
+                                        <div class="video-progress"></div>
+                                    </div>
+                                    <div class="face back"></div>
+                                </div>
+                                <div class="model-base">
+                                    <div class="face top"></div>
+                                    <div class="face front"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>스마트 팩토리</h3>
+                        <p class="description">디지털 트윈 및 지능형 생산 공정</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Notice View -->
+    <div id="view-notice" class="content-view">
+        <section id="notice" class="support-board section-padding">
+            <div class="container container-center">
+                <div class="support-cards-grid slide-up-section">
+                    <div class="support-card" id="btn-show-form">
+                        <div class="support-icon icon-blue">✎</div>
+                        <p>게시글 작성하기</p>
+                    </div>
+                    <div class="support-card" id="btn-popular-posts">
+                        <div class="support-icon icon-green">📋</div>
+                        <p>인기 게시글 보기</p>
+                    </div>
+                    <div class="support-card">
+                        <div class="support-icon icon-red">⭐</div>
+                        <p>자료실 및 공지</p>
+                    </div>
+                </div>
+
+                <header class="section-title-wrapper-centered fade-in-section">
+                    <div class="text-mask"><h2>학과 커뮤니티 게시판</h2></div>
+                    <p style="color: #86868b; margin-top: -10px; margin-bottom: 40px;">실시간으로 소통하고 정보를 공유하세요.</p>
+                </header>
+
+                <div class="support-search-wrapper fade-in-section">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="board-search" placeholder="궁금한 키워드를 검색해 보세요">
+                </div>
+
+                <div id="board-list" class="support-posts-grid">
+                    <p class="loading">정보를 불러오는 중...</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Clubs View -->
+    <div id="view-clubs" class="content-view">
+        <section id="clubs" class="section-padding fade-in-section">
+                    <div class="tabs-container">
+                        <header class="tabs-header">
+                            <h2>전공동아리</h2>
+                            <ul class="club-tabs">
+                                <li class="tab-item active" data-club="mas">MAS</li>
+                                <li class="tab-item" data-club="mca">MCA</li>
+                                <li class="tab-item" data-club="moas">MoAS</li>
+                                <li class="tab-item" data-club="smart">SMART</li>
+                                <li class="tab-item" data-club="ur">UR</li>
+                                <li class="tab-item" data-club="intelligent">지능형로봇</li>
+                            </ul>
+                        </header>
+                        
+                        <div id="club-content" class="club-display-content glass-panel-premium">
+                            <div class="club-info-text">
+                                <h3 id="club-display-name">MAS</h3>
+                                <p id="club-display-description">
+                                    MAS는 학교에서 배우는 것 뿐만 아니라 더 나아가 사회에 도움이 될 수 있는 로봇을 직접 만들어 각종 대회에 출전해 학생들끼리 서로 협업을 하며 자신의 전공지식과 역량을 같이 키워나가는 로봇자동화공학부 전공동아리입니다.
+                                </p>
+                            </div>
+                            <div class="club-info-image">
+                                <img id="club-display-img" src="club-mas.png" alt="동아리 활동 이미지">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Post Form Modal -->
+    <div id="modal-post-form" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3 style="color: #333; margin-bottom: 20px;">학과 소식 남기기</h3>
+            <form id="post-form">
+                <div class="form-row">
+                    <input type="text" id="post-author" placeholder="이름" required>
+                    <input type="email" id="post-email" placeholder="이메일" required>
+                </div>
+                <input type="password" id="post-password" placeholder="비밀번호 (수정/삭제 시 필요)" required>
+                <textarea id="post-content" placeholder="공유하고 싶은 정보나 질문을 요약해 주세요..." required></textarea>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">게시글 등록</button>
+                    <button type="button" class="btn btn-light" id="btn-cancel-form">취소</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-premium">
+        <div class="modal-glass-content">
+            <span class="close-modal">&times;</span>
+            <div class="login-header">
+                <h2>환영합니다</h2>
+                <p>로봇소프트웨어과 커뮤니티에 로그인하세요.</p>
+            </div>
+            <form id="login-form-premium" class="premium-form">
+                <div class="input-group-premium">
+                    <input type="text" id="login-id" required>
+                    <label for="login-id">아이디</label>
+                    <div class="input-glow"></div>
+                </div>
+                <div class="input-group-premium">
+                    <input type="password" id="login-pw" required>
+                    <label for="login-pw">비밀번호</label>
+                    <div class="input-glow"></div>
+                </div>
+                <button type="submit" class="btn-submit-premium">로그인</button>
+                <div class="form-footer">
+                    <a href="#">비밀번호를 잊으셨나요?</a>
+                    <span>계정이 없으신가요? <a href="#" class="signup-link">회원가입</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signup-modal" class="modal-premium">
+        <div class="modal-glass-content signup-content">
+            <span class="close-modal signup-close">&times;</span>
+            <div class="login-header">
+                <h2>회원가입</h2>
+                <p>가입여부 확인을 위해 아래 정보를 입력해주세요.</p>
+            </div>
+            <form id="signup-form-premium" class="premium-form">
+                <div class="input-group-premium">
+                    <input type="text" id="signup-name" required>
+                    <label for="signup-name">이름</label>
+                    <div class="input-glow"></div>
+                </div>
+                <div class="input-group-premium">
+                    <input type="text" id="signup-birth" maxlength="8" placeholder="예: 20000101" required>
+                    <label for="signup-birth">생년월일 8자리</label>
+                    <div class="input-glow"></div>
+                </div>
+                <div class="input-group-premium">
+                    <input type="text" id="signup-id" required>
+                    <label for="signup-id">학번/교번</label>
+                    <div class="input-glow"></div>
+                </div>
+                <div class="form-actions-premium">
+                    <button type="submit" class="btn-confirm">확인</button>
+                    <button type="button" class="btn-cancel">취소</button>
+                    <button type="button" class="btn-find">학번/교번찾기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
